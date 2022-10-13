@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+  <script>
+    function moveNave(event) {
+      //console.log(event);
+      //console.log(event.offsetX);
+      let canvas = document.getElementById("idCanvas");
+      let ctx = canvas.getContext("2d");
+      let imagem = document.getElementById("nave");
+      ctx.drawImage(imagem, event.offsetX , event.offsetY);
+
+
+    }
+
+    function iniciar() {
+      let canvas = document.getElementById("idCanvas");
+      let ctx = canvas.getContext("2d");
+      let imagem = document.getElementById("nave");
+      ctx.drawImage(imagem, 50 , 50);
+      imagem = document.getElementById("inimigo1");
+      ctx.drawImage(imagem, 150 , 150);
+    }
+
+  </script>
+
+  <body onload="iniciar()">
+    <canvas id="idCanvas" width="600" height="400" style="background-color:white;border:1px solid #000000;" onmousemove="moveNave(event)">
+    </canvas>
+
+    <img src="nave.png" id="nave" >
+    <img src="inimigo-fase1.png" id="inimigo1" >
+    <img src="inimigo-fase2.png" id="inimigo2" >
+    <img src="tiro.png" id="id_tiro" >
+  </body>
+</html>

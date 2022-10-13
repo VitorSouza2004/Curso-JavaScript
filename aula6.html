@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+  <script>
+
+    class Nave {
+      constructor(ctx, imagem) {
+        this.ctx = ctx;
+        this.imagem = imagem;
+        this.x = 0;
+        this.y = 350;
+        this.destinoX = 0;
+      }
+      apaga() {
+        this.ctx.clearRect(this.x,this.y,35,44);
+      }
+      desenha() {
+        this.ctx.drawImage(this.imagem, this.x, this.y);
+      }
+      move() {
+        if (this.destinoX == this.x) return;
+        this.apaga();
+        if (this.destinoX > this.x) this.x += 2;
+        else this.x -= 2;
+        this.desenha();
+      }
+      posicao(x) {
+        this.destinoX = x +(x%2);
+      }
+    }
+
+    function posicao(event) {
+      nave.posicao(event.offsetX);
+    }
+
+    let nave;
+
+    function executaCiclo() {
+      nave.move();
+    }
+
+    function iniciar() {
+      let canvas = document.getElementById("idCanvas");
+      let ctx = canvas.getContext("2d");
+      let imagem = document.getElementById("nave");
+      nave = new Nave(ctx,imagem);
+      intervalo = window.setInterval(executaCiclo,5);
+    }
+
+  </script>
+
+  <body onload="iniciar()">
+    <canvas id="idCanvas" width="600" height="400" style="background-color:white;border:1px solid #000000;" onmousemove="posicao(event)">
+    </canvas>
+
+    <img src="nave.png" id="nave" >
+    <img src="inimigo-fase1.png" id="inimigo1" >
+    <img src="inimigo-fase2.png" id="inimigo2" >
+    <img src="tiro.png" id="id_tiro" >
+  </body>
+</html>
